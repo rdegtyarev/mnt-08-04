@@ -1,0 +1,18 @@
+---
+- name: Add Elasticsearch
+  hosts: elasticsearch
+  roles:
+    - elastic-role
+- name: Add Kibana
+  hosts: kibana
+  vars:
+    elastic_host: "{{ hostvars['el-instance']['ansible_facts']['default_ipv4']['address'] }}"
+  roles:
+    - kibana-role
+- name: Add filebeat
+  hosts: app
+  vars:
+    elastic_host: "{{ hostvars['el-instance']['ansible_facts']['default_ipv4']['address'] }}"
+    kibana_host: "{{ hostvars['k-instance']['ansible_facts']['default_ipv4']['address'] }}"
+  roles:
+    - filebeat-role
