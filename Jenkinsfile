@@ -13,7 +13,7 @@ node("agent-01"){
                 string(name: 'APP_IP', trim: true),
                 booleanParam('PROD_RUN')
                 ]
-        prod_run=${inputMap['PROD_RUN']}
+        prod_run=inputMap['PROD_RUN']
     }
     stage("Run playbook"){
         if (prod_run){
