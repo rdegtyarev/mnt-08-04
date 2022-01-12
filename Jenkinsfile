@@ -7,10 +7,11 @@ node("agent-01"){
         prod_run=true
     }
     stage("Input hosts IP"){
-                inputMap = input message: 'Введите ip адреса серверов Elasticsearch, Kibana, Filebeat', parameters: [
+                inputMap = input message: 'Введите ip адреса серверов Elasticsearch, Kibana, Filebeat и тип запуска (prod_run)', parameters: [
                 string(name: 'ELASTIC_IP', trim: true), 
                 string(name: 'KIBANA_IP', trim: true),
                 string(name: 'APP_IP', trim: true),
+                choice(choices: ['true', 'false'], name: 'prod_run')
                 ]
     }
     stage("Run playbook"){
