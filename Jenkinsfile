@@ -13,9 +13,6 @@ node("agent-01"){
                 string(name: 'APP_IP', trim: true),
                 ]
     }
-    stage("Install roles"){
-        sh 'ansible-galaxy install -r requirements.yml --roles-path ./roles'
-    }
     stage("Run playbook"){
         if (prod_run){
             // Заменить credentialsId на свои (ssh key для доступа к серверам)
