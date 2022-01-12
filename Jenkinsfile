@@ -14,7 +14,7 @@ node("agent-01"){
                 ]
     }
     stage("Install roles"){
-        sh 'ansible-galaxy install -r requirements.yml'
+        sh 'ansible-galaxy install -r requirements.yml --roles-path roles'
     }
     stage("Run playbook"){
         if (prod_run){
