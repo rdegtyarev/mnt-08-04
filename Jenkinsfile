@@ -3,16 +3,17 @@ node("agent-01"){
         // Заменить credentialsId на свои (ssh key для доступа к github)
         git branch: 'main', credentialsId: 'f2247888-7db8-497e-9cc3-cc787ea4d74d', url: 'git@github.com:rdegtyarev/mnt-08-04.git'
     }
-    stage("Sample define secret_check"){
-        prod_run=true
-    }
+    // stage("Sample define secret_check"){
+    //     prod_run=true
+    // }
     stage("Input hosts IP"){
                 inputMap = input message: 'Введите ip адреса серверов Elasticsearch, Kibana, Filebeat и тип запуска (prod_run)', parameters: [
                 string(name: 'ELASTIC_IP', trim: true), 
                 string(name: 'KIBANA_IP', trim: true),
                 string(name: 'APP_IP', trim: true),
-                choice(choices: ['true', 'false'], name: 'prod_run')
+                choice(choices: ['true', 'false'], name: 'PROD_RUN')
                 ]
+        prod_run=${inputMap['PROD_RUN']}
     }
     stage("Run playbook"){
         if (prod_run){
