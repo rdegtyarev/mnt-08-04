@@ -11,7 +11,7 @@ node("agent-01"){
                 string(name: 'ELASTIC_IP', trim: true), 
                 string(name: 'KIBANA_IP', trim: true),
                 string(name: 'APP_IP', trim: true),
-                choice(choices: ['true', 'false'], name: 'PROD_RUN')
+                booleanParam('PROD_RUN')
                 ]
         prod_run=${inputMap['PROD_RUN']}
     }
